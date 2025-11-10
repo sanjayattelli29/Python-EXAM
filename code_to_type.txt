@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    int n; 
+    cin >> n;
+    vector<pair<long long, long long>> schools(n);
+    for (int i = 0; i < n; i++) cin >> schools[i].first >> schools[i].second;
+
+    int q; 
+    cin >> q;
+    while (q--) {
+        long long maxD, minF, maxF;
+        cin >> maxD >> minF >> maxF;
+
+        vector<pair<long long, long long>> s;
+        for (auto &x : schools)
+            if (x.first <= maxD && x.second >= minF && x.second <= maxF)
+                s.push_back(x);
+
+        sort(s.begin(), s.end(), [](auto &a, auto &b) {
+            if (a.first == b.first) return a.second > b.second;
+            return a.first < b.first;
+        });
+
+        long long ans = 0, best = 0;
+        for (auto &[d, f] : s)
+            if (f > best) best = f, ans++;
+
+        cout << ans << "\n";
+    }
+    return 0;
+}
