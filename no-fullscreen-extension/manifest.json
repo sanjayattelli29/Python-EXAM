@@ -1,0 +1,15 @@
+{
+    "manifest_version": 3,
+    "name": "No Fullscreen",
+    "version": "1.0",
+    "description": "Blocks websites from forcing fullscreen.",
+    "permissions": ["scripting"],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["content.js"],
+        "run_at": "document_start"
+    }]
+}
